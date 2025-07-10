@@ -1,0 +1,337 @@
+System Overview
+The system facilitates the collection, transportation, and proper disposal of electronic waste through a coordinated network of users.
+
+System Name: EcoTech
+Technology Stack: React +javascrpt(JSX) + Tailwind CSS v3.4.17 + Supabase
+Development Approach: Complete all frontend development first, then connect it with Supabase.
+
+Primary Entry Point: All users start at the EcoTech landing page
+
+Landing Page Structure and Content:
+
+Main Navigation Menu (Top Bar):
+- The landing page navigation bar will include the following menu items:
+    - 🏠 Home: Scrolls to hero section or reloads page.
+    - ♻️ Recycling Center Staff: Takes user to the registration form for new recycling centers.
+    - 🔗 Career: Opens the waste collector registration form. Submission is pending admin approval.
+    - 📚 Learn: Links to the blog/articles section with e-waste education content.
+    - 🔐 Login: Opens a modal or redirects to a login page for existing users of any role. The system will check credentials, detect the role, and direct the user to their specific dashboard.
+    - ✍️ Register: Opens a modal or redirects to the registration page for new General Public users.
+    - ♻️ Find Recycling Centers: Takes the user to a page listing certified recycling centers and their details.
+
+🎯 Hero Section:
+- Catchy headline: "Simplifying E-Waste Collection for a Greener Tomorrow".
+- Call-to-action button: ✅ Schedule Pickup. Clicking this requires the user to Login or Register.
+- Background: A sustainable-themed image (e.g., recycling bin + tech devices) should be used.
+
+How It Works Section:
+- Purpose: Visually explain the simple steps involved in using EcoTech.
+- Content: 3-4 simple steps (e.g., Submit Request -> Collector Picks Up -> Items Recycled) with brief descriptions.
+
+Features/Benefits Section:
+- Purpose: Highlight the key advantages of using EcoTech from the user's perspective.
+- Content: List key features or benefits with icons and short explanations (e.g., Convenience, Finding Certified Centers, Environmental Impact).
+
+About Us / Our Mission Section:
+- Purpose: Share the purpose and values behind EcoTech.
+- Content: A brief section about the project's mission and background.
+
+Testimonials or Social Proof Section:
+- Purpose: Showcase positive feedback from users or impact statistics (to be added post-launch).
+- Content: Plan for a section to include quotes from satisfied users or statistics about impact.
+
+Call-to-Action (CTA) Repetition:
+- Purpose: Include calls to action in multiple places on the page.
+- Content: Suggest adding prominent buttons like "Schedule Pickup" or "Find Recycling Centers" in other relevant sections of the page.
+
+Footer:
+- Purpose: Contains essential links and copyright information.
+- Content: Include links like Contact, Privacy Policy, Terms of Service, Social Media links, and copyright notice.
+
+Visual Design Notes (Optional but helpful):
+- Purpose: Briefly mention desired look and feel.
+- Content: Add a line about the preferred color palette, style (e.g., clean, modern, illustrations vs. photos).
+
+Authentication System – Single login user types
+Role-Based Dashboard Routing – After login, users are automatically directed to their specific dashboards
+
+User Types and Their Relationships
+1. General Public (Primary Users)
+Role: E-waste generators who need collection services
+Core Purpose: Submit collection requests and track their progress
+
+Key Functionalities:
+
+Account Management: Secure registration, login/logout, profile updates, password changes
+
+Collection Request Lifecycle:
+
+Submit detailed collection requests (item types, quantities, preferred dates)
+
+Real-time tracking of request status from submission to completion
+
+View complete history of past requests
+
+Service Interaction: Rate and provide feedback after service completion
+
+Education: Access blogs and educational content about proper e-waste disposal
+
+Recycling Center Interaction:
+
+View list of certified recycling centers
+
+View center details (location, capacity, contact, map, hours)
+
+- Registration Form: A dedicated form will be available for new recycling centers (staff) to register with the system. Submission requires admin approval.
+    - Required Information: Center Name, Address, Contact Person Name, Contact Email, Contact Phone Number, Operating Hours, Accepted Materials, Capacity Information (optional), supporting documentation (e.g., certification upload - optional).
+
+Relationship to Other Users:
+
+→ Waste Collectors: Requests are assigned to collectors for pickup
+
+← Admin: Monitored and managed by admin for oversight
+
+← Recycling Centers: Receive confirmation when items reach processing facilities
+
+2. Waste Collectors (Service Providers)
+Role: Field operatives who collect e-waste from public users
+Core Purpose: Execute collection tasks and transport items to recycling centers
+
+Key Functionalities:
+
+Account Management: Registration via Career page, secure authentication
+
+Task Management:
+
+View assigned collection tasks in real-time
+
+Access task details and user information
+
+Scheduling Operations: Coordinate and manage pickup appointments with users
+
+Field Operations:
+
+Update collection status in real-time:
+- Trigger: Collector changes status via mobile app.
+- Outcomes:
+    - Update request status in database.
+    - Send real-time notification to General Public user about status change.
+    - Log timestamp of status change.
+
+Upload photographic evidence of collected items
+
+Report field issues (wrong addresses, unavailable items, access problems)
+
+Delivery Chain: Confirm transportation and delivery to recycling centers
+
+Relationship to Other Users:
+
+← General Public: Receive collection requests from users
+
+→ Recycling Centers: Deliver collected items for processing
+
+← Admin: Tasks assigned and monitored by admin
+
+↔ Admin: Report issues that require administrative intervention
+
+- Registration Process: Waste collectors must fill out a registration form via the Career page and submit it for admin approval. They will receive an email notification upon admin approval.
+
+3. Recycling Center Staff (Processing Units)
+Role: Facility operators who receive and process delivered e-waste
+Core Purpose: Verify deliveries and manage processing workflow
+
+Key Functionalities:
+
+Account Management: Registration and secure authentication
+
+Delivery Management:
+
+Verify and confirm collector drop-offs: When a waste collector brings e-waste, staff can update the status to indicate receipt.
+
+Access comprehensive delivery records (collector info, request IDs, item details, timestamps)
+
+Quality Control: Document delivery issues (incorrect items, quantity discrepancies)
+
+Processing Workflow: Update processing status of received items throughout disposal process
+
+Record Keeping: Maintain detailed logs of all received materials
+
+User Registration Integration:
+
+Public users can register under a specific center
+
+Once registered, user is directed to that center's dashboard
+
+Relationship to Other Users:
+
+← Waste Collectors: Receive deliveries from collectors
+
+→ General Public: Provide final processing confirmation
+
+← Admin: Monitored by admin for operational oversight
+
+→ Admin: Report processing issues requiring intervention
+
+- Registration Process: Recycling center staff must fill out a dedicated registration form to register with the system. They will receive an email notification upon admin approval of their registration.
+
+4. Admin (System Operators)
+Role: System administrators with full oversight capabilities
+Core Purpose: Manage entire system operation and resolve issues
+
+Key Functionalities:
+
+System Authentication: Secure administrative access
+
+User Management:
+
+Monitor all user accounts across all types
+
+Approve or reject collector registrations from Career page
+
+- Manage Registration Requests: The Admin dashboard will display registration requests from both Waste Collectors and Recycling Center Staff. Admin can review, approve, or reject these requests.
+
+Remove accounts when necessary (violations, inactivity)
+
+Request Oversight: Monitor and manage all collection requests system-wide
+
+Content Management:
+
+Publish educational blogs and articles
+
+Manage recycling center information and registration options
+
+Analytics and Intelligence: Generate comprehensive system usage reports
+
+Issue Resolution: Review and resolve problems reported by collectors and recycling staff
+
+Relationship to Other Users:
+
+↔ All User Types: Complete oversight and management authority
+
+← All User Types: Receive issue reports and system feedback
+
+→ All User Types: Provide system updates and issue resolutions
+
+System Workflow and Data Flow
+Primary Workflow:
+Request Initiation: General Public submits e-waste collection request
+
+Task Assignment: Admin assigns request to available Waste Collector
+
+Collection Execution: Collector schedules, collects, and documents pickup
+
+Transportation: Collector transports items to designated Recycling Center
+
+Processing: Recycling Center Staff verifies delivery and processes items
+
+Completion: System updates all parties on completion status
+
+Feedback Loop: General Public provides service feedback
+
+Career Registration: New waste collectors register via Career link and access their dashboard after approval
+
+Recycling Center Registration: General users register to a specific center and access center-specific services
+
+Information Flow:
+Real-time Status Updates: All parties receive relevant status updates
+
+Documentation Trail: Complete audit trail from request to processing
+
+Issue Escalation: Problems flow upward to appropriate resolution level
+
+Analytics: System usage data flows to admin for reporting and optimization
+
+AI System Requirements
+Authentication & Security
+Multi-tier authentication system for different user types
+
+Secure session management and password protection
+
+Role-based access control
+
+Request Management Intelligence
+Smart assignment algorithm for matching requests to collectors
+
+Predictive scheduling based on location and availability
+
+Automated status tracking and notification system
+
+Communication Hub
+Real-time notifications across all user types
+
+Issue reporting and escalation system
+
+Feedback and rating system integration
+
+Analytics and Reporting
+Usage pattern analysis
+
+Performance metrics for collectors and centers
+
+System efficiency reporting for admin
+
+Educational Content Management
+Dynamic content delivery system
+
+User engagement tracking for educational materials
+
+Technical Considerations
+Database Requirements
+Data Relationships:
+- One General Public user can have many Collection Requests.
+- A Collection Request is assigned to one Waste Collector at a time (can potentially be reassigned).
+- A Waste Collector can be assigned many Collection Requests.
+- A Collection Request results in one or more Deliveries to a Recycling Center.
+- One Recycling Center can receive many Deliveries from many Waste Collectors.
+- Recycling Center Staff are associated with a specific Recycling Center.
+- General Public users can optionally register with one Recycling Center.
+
+Data Constraints (Examples):
+- Collection Request items must be from a predefined list of accepted e-waste types.
+- Quantities must be positive numbers.
+- Preferred dates should be within a reasonable future range.
+- User email addresses must be unique.
+
+User profiles and authentication data
+
+Request tracking and status management
+
+Delivery confirmation and processing records
+
+Collector and center registration data
+
+Educational content and system analytics
+
+Integration Points
+Mobile accessibility for field operations
+
+Photo upload and storage capabilities
+
+Real-time notification system
+
+Career page form and center-specific registration
+
+Reporting and analytics dashboard
+
+Scalability Features
+Multi-location support
+
+High-volume request processing
+
+Concurrent user management
+
+Performance optimization for mobile devices
+
+Error Handling and Edge Cases:
+- Failed Pickup: If a collector cannot complete a pickup (e.g., user not available), the status should be updated to "Needs Reschedule" or "Failed". The collector must provide a reason. The system should notify the user and Admin.
+- Registration Rejection: Admin must provide a reason for rejecting a registration. The rejection email notification should include this reason.
+
+Notifications (Email and In-App):
+- Waste Collector Registration Approved/Rejected (Email): Sent to collector after Admin review. Includes approval status and reason for rejection.
+- Recycling Center Registration Approved/Rejected (Email): Sent to center staff after Admin review. Includes approval status and reason for rejection.
+- Collection Request Assigned (In-App): Sent to General Public user when a collector accepts their request.
+- Collection Scheduled (Email and In-App): Sent to General Public user and Collector when pickup is scheduled.
+- Collection Status Update (In-App): Sent to General Public user when collector updates status (e.g., "On the Way", "Arrived").
+- Delivery Confirmed (In-App): Sent to General Public user and Collector when Recycling Center confirms receipt of items.
+- Request Cancelled (In-App): Sent to all relevant parties if a request is cancelled.
+- Issue Reported/Resolved (In-App for reporters, Email for Admin): Notification when an issue is reported or its status changes.

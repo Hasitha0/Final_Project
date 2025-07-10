@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "generatedAt": "2025-06-05T17:56:12.588Z",
+    "tasksAnalyzed": 1,
+    "totalTasks": 45,
+    "analysisCount": 1,
+    "thresholdScore": 5,
+    "projectName": "Taskmaster",
+    "usedResearch": true
+  },
+  "complexityAnalysis": [
+    {
+      "taskId": 2,
+      "taskTitle": "Integrate Tailwind CSS",
+      "complexityScore": 4,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Decompose the 'Integrate Tailwind CSS' task into subtasks covering installation, configuration, basic styling implementation, and responsive design setup.",
+      "reasoning": "Medium complexity due to potential configuration issues and learning curve. Requires breaking down into smaller, manageable steps."
+    }
+  ]
+}

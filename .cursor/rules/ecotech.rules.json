@@ -1,0 +1,112 @@
+{
+  "rules": {
+    "component_structure": {
+      "description": "Standard structure for React components",
+      "template": "import React from 'react';\nimport { cn } from '../utils/cn';\n\nexport const {{ComponentName}} = ({ children, className, ...props }) => {\n  return (\n    <div className={cn('', className)} {...props}>\n      {children}\n    </div>\n  );\n};"
+    },
+    "magic_ui_imports": {
+      "description": "Available Magic UI components for modern UI effects",
+      "components": {
+        "text": [
+          "AnimatedGradientText",
+          "TextReveal",
+          "AnimatedShinyText",
+          "SparklesText"
+        ],
+        "effects": [
+          "ShineEffect",
+          "BorderBeam",
+          "Meteors",
+          "WarpBackground"
+        ],
+        "buttons": [
+          "ShinyButton",
+          "RainbowButton",
+          "PulsatingButton"
+        ]
+      }
+    },
+    "color_scheme": {
+      "description": "Project color scheme",
+      "colors": {
+        "primary": {
+          "light": "emerald-400",
+          "base": "emerald-500",
+          "dark": "emerald-600"
+        },
+        "secondary": {
+          "light": "teal-400",
+          "base": "teal-500",
+          "dark": "teal-600"
+        },
+        "background": {
+          "light": "slate-800",
+          "base": "slate-900",
+          "dark": "slate-950"
+        },
+        "text": {
+          "primary": "white",
+          "secondary": "slate-300",
+          "muted": "slate-400"
+        }
+      }
+    },
+    "layout": {
+      "description": "Standard layout classes",
+      "container": "container mx-auto px-4",
+      "section": "py-20",
+      "grid": {
+        "default": "grid gap-8",
+        "responsive": {
+          "sm": "grid-cols-2",
+          "lg": "grid-cols-3",
+          "xl": "grid-cols-4"
+        }
+      }
+    },
+    "animations": {
+      "description": "Standard animation classes",
+      "hover": {
+        "scale": "hover:scale-105 transition-transform duration-300",
+        "shine": "hover:bg-opacity-90 transition-colors duration-300",
+        "glow": "hover:shadow-lg hover:shadow-emerald-500/20 transition-shadow duration-300"
+      },
+      "motion": {
+        "fade": "animate-fade-in duration-500",
+        "slide": "animate-slide-up duration-500",
+        "reveal": "animate-text-reveal duration-500"
+      }
+    },
+    "responsive": {
+      "description": "Breakpoint standards",
+      "breakpoints": {
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px",
+        "2xl": "1536px"
+      }
+    },
+    "file_structure": {
+      "description": "Project file structure standards",
+      "directories": {
+        "components": {
+          "path": "src/components",
+          "subdirs": ["ui", "layout", "features", "shared"]
+        },
+        "pages": {
+          "path": "src/pages",
+          "subdirs": ["auth", "dashboard", "public"]
+        },
+        "utils": {
+          "path": "src/utils",
+          "files": ["cn.js", "animations.js", "validation.js"]
+        },
+        "assets": {
+          "path": "src/assets",
+          "subdirs": ["images", "icons", "fonts"]
+        }
+      }
+    }
+  }
+} 
