@@ -1063,7 +1063,6 @@ const CollectorDashboard = () => {
                   <AnimatedGradientText className="text-3xl font-bold mb-2">
                     Collector Dashboard
                   </AnimatedGradientText>
-                  <p className="text-gray-300">Welcome back, {user?.name}! Manage your collection tasks and earnings.</p>
                 </div>
                 
                 <div className="flex items-center space-x-4">
@@ -1190,36 +1189,6 @@ const CollectorDashboard = () => {
           {/* Enhanced Overview Tab */}
           {activeTab === 'overview' && (
             <div className="space-y-8">
-              {/* Welcome Section */}
-              <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-2xl p-6 text-white shadow-lg">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h2 className="text-2xl font-bold mb-2">Welcome back, {user?.name || 'Collector'}! 👋</h2>
-                    <p className="text-emerald-100 text-lg">
-                      You're currently <span className="font-semibold">{collectorStatus}</span>
-                      {collectorStatus === 'active' && ' and ready for collections'}
-                    </p>
-                  </div>
-                  <div className="hidden md:block">
-                    <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                      <Truck className="h-8 w-8 text-white" />
-                    </div>
-                  </div>
-                </div>
-                
-                {collectorStatus === 'inactive' && (
-                  <div className="mt-4 p-4 bg-white bg-opacity-10 rounded-xl">
-                    <p className="text-emerald-100 mb-3">🚀 Ready to start collecting? Go active to see available jobs!</p>
-                    <button
-                      onClick={toggleCollectorStatus}
-                      className="bg-white text-emerald-600 px-4 py-2 rounded-lg font-medium hover:bg-emerald-50 transition-colors"
-                    >
-                      Go Active Now
-                    </button>
-                  </div>
-                )}
-              </div>
-
               {/* Quick Stats - Enhanced */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"

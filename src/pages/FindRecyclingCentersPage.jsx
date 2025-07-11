@@ -197,8 +197,8 @@ const FindRecyclingCentersPage = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-white to-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green-500 mx-auto mb-4"></div>
-          <p className="text-black text-xl font-medium">Loading recycling centers...</p>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-600 mx-auto mb-4"></div>
+          <p className="text-gray-800 text-xl font-medium">Loading recycling centers...</p>
         </div>
       </div>
     );
@@ -208,29 +208,36 @@ const FindRecyclingCentersPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-white to-gray-50 text-black relative">
       <div className="absolute inset-0 bg-white/30 backdrop-blur-sm"></div>
       <div className="relative">
-        {/* Header */}
-        <div className="text-center pt-20 pb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">
-            Find Recycling Centers
-          </h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto px-4 mb-6">
-            Locate certified e-waste recycling centers near you or register your facility
-          </p>
-          
-          {/* Register Center Button */}
-          <div className="flex justify-center">
+        {/* Hero Banner Section */}
+        <section 
+          className="relative h-96 flex items-center justify-center bg-cover bg-center mb-12"
+          style={{backgroundImage: 'url(/src/assets/images/recycling-hero.jpg)'}}
+        >
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="relative z-10 text-center">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-wider">
+              RECYCLING CENTERS
+            </h1>
+            <div className="flex items-center justify-center space-x-2 text-lg mb-8">
+              <span className="text-white">EcoTech</span>
+              <span className="text-yellow-400">—</span>
+              <span className="text-yellow-400">Find Centers</span>
+            </div>
+            <p className="text-xl text-white/90 max-w-3xl mx-auto px-4 mb-8">
+              Locate certified e-waste recycling centers near you or register your facility
+            </p>
             <ShimmerButton
               onClick={() => setIsFormOpen(true)}
-              className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white"
+              className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white"
             >
               Register Your Center
             </ShimmerButton>
           </div>
-        </div>
+        </section>
 
         {/* Search and Filter Controls */}
         <div className="max-w-7xl mx-auto px-4 mb-8">
-          <MagicCard className="p-6 bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl rounded-xl">
+          <MagicCard className="p-6 bg-white rounded-2xl border border-gray-200 shadow-xl">
             <div className="space-y-4">
               {/* Search and Results Counter */}
               <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
@@ -240,7 +247,7 @@ const FindRecyclingCentersPage = () => {
                     placeholder="Search by name or location..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/70 backdrop-blur-sm border border-white/30 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-sm"
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -248,7 +255,7 @@ const FindRecyclingCentersPage = () => {
                 <div className="text-sm text-gray-700">
                   {filteredCenters.length} center{filteredCenters.length !== 1 ? 's' : ''} found
                   {filteredCenters.length !== centers.length && (
-                    <span className="text-green-600"> (filtered from {centers.length})</span>
+                    <span className="text-emerald-600"> (filtered from {centers.length})</span>
                   )}
                 </div>
               </div>
@@ -262,8 +269,8 @@ const FindRecyclingCentersPage = () => {
                     onClick={() => handleMaterialToggle(material)}
                     className={`px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                       selectedMaterials.includes(material)
-                        ? 'bg-green-500 text-white shadow-lg'
-                        : 'bg-white/70 backdrop-blur-sm text-gray-700 hover:bg-white/90 border border-white/30 shadow-sm'
+                        ? 'bg-emerald-500 text-white shadow-lg'
+                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
                     }`}
                   >
                     {material}
@@ -284,11 +291,11 @@ const FindRecyclingCentersPage = () => {
 
         {/* Registration Form Modal */}
         {isFormOpen && (
-          <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <MagicCard className="p-8 bg-white/90 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl">
+              <MagicCard className="p-8 bg-white rounded-2xl border border-gray-200 shadow-2xl">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold text-black">Register Recycling Center</h2>
+                  <h2 className="text-2xl font-bold text-gray-800">Register Recycling Center</h2>
                   <button
                     onClick={() => setIsFormOpen(false)}
                     className="text-gray-400 hover:text-gray-600 text-2xl"
@@ -300,7 +307,7 @@ const FindRecyclingCentersPage = () => {
                 {submitSuccess ? (
                   <div className="text-center py-8">
                     <div className="text-6xl mb-4">🎉</div>
-                    <h3 className="text-2xl font-bold text-green-600 mb-4">
+                    <h3 className="text-2xl font-bold text-emerald-600 mb-4">
                       Registration Submitted Successfully!
                     </h3>
                     <p className="text-gray-700 mb-6">
@@ -308,7 +315,7 @@ const FindRecyclingCentersPage = () => {
                       You'll be able to login once your account is activated.
                     </p>
                     <div className="bg-gray-50 p-4 rounded-lg text-left mb-6">
-                      <h4 className="font-semibold text-black mb-2">Next Steps:</h4>
+                      <h4 className="font-semibold text-gray-800 mb-2">Next Steps:</h4>
                       <ol className="text-sm text-gray-700 space-y-1">
                         <li>1. Admin will review your registration</li>
                         <li>2. You'll receive email notification when approved</li>
@@ -318,7 +325,7 @@ const FindRecyclingCentersPage = () => {
                     </div>
                     <ShimmerButton
                       onClick={() => setIsFormOpen(false)}
-                      className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white"
+                      className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white"
                     >
                       Close
                     </ShimmerButton>
@@ -344,7 +351,7 @@ const FindRecyclingCentersPage = () => {
                           required
                           value={formData.staffName}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-[#ffffff] border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                           placeholder="Enter contact person's full name"
                         />
                       </div>
@@ -360,7 +367,7 @@ const FindRecyclingCentersPage = () => {
                           required
                           value={formData.centerName}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-[#ffffff] border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                           placeholder="Enter your center's name"
                         />
                       </div>
@@ -377,7 +384,7 @@ const FindRecyclingCentersPage = () => {
                         required
                         value={formData.address}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-[#ffffff] border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                         placeholder="Enter full address"
                       />
                     </div>
@@ -394,7 +401,7 @@ const FindRecyclingCentersPage = () => {
                           required
                           value={formData.phone}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-[#ffffff] border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                           placeholder="Enter phone number"
                         />
                       </div>
@@ -408,7 +415,7 @@ const FindRecyclingCentersPage = () => {
                           required
                           value={formData.email}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-[#ffffff] border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                           placeholder="Enter email address"
                         />
                       </div>
@@ -425,7 +432,7 @@ const FindRecyclingCentersPage = () => {
                         required
                         value={formData.registrationNumber}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-[#ffffff] border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                         placeholder="Enter registration number"
                       />
                     </div>
@@ -442,7 +449,7 @@ const FindRecyclingCentersPage = () => {
                           required
                           value={formData.password}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-[#ffffff] border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                           placeholder="Create a password"
                         />
                       </div>
@@ -456,7 +463,7 @@ const FindRecyclingCentersPage = () => {
                           required
                           value={formData.confirmPassword}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-[#ffffff] border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                           placeholder="Confirm your password"
                         />
                       </div>
@@ -474,14 +481,14 @@ const FindRecyclingCentersPage = () => {
                             ...prev,
                             agreeToTerms: e.target.checked
                           }))}
-                          className="mr-3 mt-1 h-4 w-4 text-green-500 bg-white border-gray-300 rounded focus:ring-green-500 focus:ring-2"
+                          className="mr-3 mt-1 h-4 w-4 text-emerald-500 bg-white border-gray-300 rounded focus:ring-emerald-500 focus:ring-2"
                         />
                         <span className="text-sm text-gray-700">
                           I agree to the{' '}
                           <button
                             type="button"
                             onClick={() => setShowTerms(true)}
-                            className="text-green-600 hover:text-green-700 underline"
+                            className="text-emerald-600 hover:text-emerald-700 underline"
                           >
                             terms of service
                           </button>
@@ -502,7 +509,7 @@ const FindRecyclingCentersPage = () => {
                       <ShimmerButton
                         type="submit"
                         disabled={isSubmitting}
-                        className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white"
+                        className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? 'Submitting...' : 'Submit Application'}
                       </ShimmerButton>
@@ -520,12 +527,12 @@ const FindRecyclingCentersPage = () => {
             {/* Centers List */}
             <div className="lg:col-span-1 space-y-4">
               {filteredCenters.length === 0 ? (
-                <MagicCard className="text-center py-8 bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl rounded-xl">
+                <MagicCard className="text-center py-8 bg-white rounded-2xl border border-gray-200 shadow-xl">
                   <p className="text-gray-700">No recycling centers found matching your criteria.</p>
                   {selectedMaterials.length > 0 && (
                     <button
                       onClick={() => setSelectedMaterials([])}
-                      className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors shadow-sm"
+                      className="mt-4 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors shadow-sm"
                     >
                       Clear Filters
                     </button>
@@ -537,34 +544,36 @@ const FindRecyclingCentersPage = () => {
                   {currentCenters.map(center => (
                     <MagicCard
                       key={center.id}
-                      className={`cursor-pointer transition-all duration-300 hover:scale-[1.02] bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl rounded-xl ${
-                        selectedCenter?.id === center.id ? 'ring-2 ring-green-500' : ''
+                      className={`cursor-pointer transition-all duration-300 hover:scale-[1.02] bg-white rounded-2xl border border-gray-200 shadow-xl ${
+                        selectedCenter?.id === center.id ? 'ring-2 ring-emerald-500' : ''
                       }`}
                       onClick={() => setSelectedCenter(center)}
                     >
-                      <div className="flex items-start justify-between mb-2">
-                        <h3 className="text-lg font-semibold text-black">{center.name}</h3>
-                        {center.status === 'pending_approval' && (
-                          <span className="px-2 py-1 bg-yellow-50 text-yellow-600 text-xs rounded-full border border-yellow-200">
-                            Pending Approval
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-gray-700 text-sm mb-2">{center.address}</p>
-                      <p className="text-gray-600 text-sm mb-2">{center.hours}</p>
-                      <div className="flex flex-wrap gap-1 mb-2">
-                        {center.materials.map(material => (
-                          <span
-                            key={material}
-                            className="px-2 py-1 bg-white/60 backdrop-blur-sm rounded-full text-xs text-gray-700 border border-white/30"
-                          >
-                            {material}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        <p>{center.phone}</p>
-                        <p>{center.email}</p>
+                      <div className="p-6">
+                        <div className="flex items-start justify-between mb-2">
+                          <h3 className="text-lg font-semibold text-gray-800">{center.name}</h3>
+                          {center.status === 'pending_approval' && (
+                            <span className="px-2 py-1 bg-yellow-50 text-yellow-600 text-xs rounded-full border border-yellow-200">
+                              Pending Approval
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-gray-700 text-sm mb-2">{center.address}</p>
+                        <p className="text-gray-600 text-sm mb-2">{center.hours}</p>
+                        <div className="flex flex-wrap gap-1 mb-2">
+                          {center.materials.map(material => (
+                            <span
+                              key={material}
+                              className="px-2 py-1 bg-gray-50 rounded-full text-xs text-gray-700 border border-gray-200"
+                            >
+                              {material}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          <p>{center.phone}</p>
+                          <p>{center.email}</p>
+                        </div>
                       </div>
                     </MagicCard>
                   ))}
@@ -574,13 +583,13 @@ const FindRecyclingCentersPage = () => {
 
             {/* Map */}
             <div className="lg:col-span-2">
-              <MagicCard className="h-[600px] overflow-hidden bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl rounded-xl">
+              <MagicCard className="h-[600px] overflow-hidden bg-white rounded-2xl border border-gray-200 shadow-xl">
                 <div className="h-full w-full relative map-container">
                   {!mapLoaded && (
                     <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg z-10">
                       <div className="text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-                        <p className="text-slate-600">Loading map...</p>
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4"></div>
+                        <p className="text-gray-600">Loading map...</p>
                       </div>
                     </div>
                   )}

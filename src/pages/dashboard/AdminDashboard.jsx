@@ -683,7 +683,7 @@ const AdminDashboard = () => {
   // Helper functions for request value formatting
   const formatRequestValue = (request) => {
     if (request.total_amount && request.total_amount > 0) {
-      return `$${request.total_amount.toFixed(2)}`;
+      return `LKR ${request.total_amount.toLocaleString('en-LK')}`;
     }
     return 'Free Collection';
   };
@@ -1309,7 +1309,14 @@ const AdminDashboard = () => {
       (allCollectionRequests || []).filter(r => r.status === 'issue_reported').length;
 
     const totalRevenue = (allCollectionRequests || [])
-      .reduce((sum, req) => sum + (parseFloat(req.total_amount) || 0), 0);
+      .filter(r => ['completed', 'confirmed'].includes(r.status)) // Only count completed and confirmed requests
+      .reduce((sum, req) => {
+        const amount = typeof req.total_amount === 'string' ? 
+          parseFloat(req.total_amount.replace(/[^0-9.-]+/g, '')) : // Remove any non-numeric characters except decimal
+          typeof req.total_amount === 'number' ? 
+            req.total_amount : 0;
+        return sum + (isNaN(amount) ? 0 : amount);
+      }, 0);
 
     const completedRequestsCount = (allCollectionRequests || [])
       .filter(req => req.status === 'completed').length;
@@ -1466,7 +1473,7 @@ const AdminDashboard = () => {
             </div>
             <div className="text-right">
               <div className="text-2xl font-bold text-orange-700">
-                ${totalRevenue.toFixed(0)}
+                LKR {totalRevenue.toLocaleString('en-LK')}
               </div>
               <div className="text-xs text-orange-600 font-medium">Total Revenue</div>
             </div>
@@ -1475,7 +1482,7 @@ const AdminDashboard = () => {
             <div className="flex justify-between text-sm">
               <span className="text-orange-600">Avg/Request</span>
               <span className="font-semibold text-orange-700">
-                ${totalRequestsCount > 0 ? (totalRevenue / totalRequestsCount).toFixed(2) : '0.00'}
+                LKR {totalRequestsCount > 0 ? (totalRevenue / totalRequestsCount).toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
               </span>
             </div>
             <div className="w-full bg-orange-200 rounded-full h-2">
@@ -3898,7 +3905,15 @@ const AdminDashboard = () => {
         completed: allCollectionRequests.filter(r => r.status === 'completed').length,
         confirmed: allCollectionRequests.filter(r => r.status === 'confirmed').length,
         cancelled: allCollectionRequests.filter(r => r.status === 'cancelled').length,
-        totalRevenue: allCollectionRequests.reduce((sum, r) => sum + (parseFloat(r.total_amount) || 0), 0)
+        totalRevenue: allCollectionRequests
+          .filter(r => ['completed', 'confirmed'].includes(r.status)) // Only count completed and confirmed requests
+          .reduce((sum, r) => {
+            const amount = typeof r.total_amount === 'string' ? 
+              parseFloat(r.total_amount.replace(/[^0-9.-]+/g, '')) : // Remove any non-numeric characters except decimal
+              typeof r.total_amount === 'number' ? 
+                r.total_amount : 0;
+            return sum + (isNaN(amount) ? 0 : amount);
+          }, 0)
       };
 
       const successRate = requestStats.total > 0 ? ((requestStats.confirmed / requestStats.total) * 100).toFixed(1) : 0;
@@ -3937,13 +3952,13 @@ including user engagement, collection request analytics, financial metrics, and 
 
       // KPI Table
       const kpiData = [
-        ['Total Revenue', `$${requestStats.totalRevenue.toFixed(2)}`],
+        ['Total Revenue', `LKR ${requestStats.totalRevenue.toLocaleString('en-LK')}`],
         ['Total Requests', requestStats.total.toString()],
         ['Total Users', userStats.total.toString()],
         ['Active Collectors', userStats.collectors.toString()],
         ['Success Rate', `${successRate}%`],
         ['Processing Rate', `${processingRate}%`],
-        ['Average Request Value', `$${avgRequestValue}`],
+        ['Average Request Value', `LKR ${avgRequestValue.toLocaleString('en-LK')}`],
         ['Active Recycling Centers', userStats.recyclingCenters.toString()]
       ];
 
@@ -4013,10 +4028,10 @@ including user engagement, collection request analytics, financial metrics, and 
       yPosition += 10;
 
       const financialData = [
-        ['Total Revenue', `$${requestStats.totalRevenue.toFixed(2)}`],
-        ['Average Request Value', `$${avgRequestValue}`],
-        ['Revenue per User', `$${userStats.total > 0 ? (requestStats.totalRevenue / userStats.total).toFixed(2) : '0.00'}`],
-        ['Revenue per Collector', `$${userStats.collectors > 0 ? (requestStats.totalRevenue / userStats.collectors).toFixed(2) : '0.00'}`]
+        ['Total Revenue', `LKR ${requestStats.totalRevenue.toLocaleString('en-LK')}`],
+        ['Average Request Value', `LKR ${avgRequestValue.toLocaleString('en-LK')}`],
+        ['Revenue per User', `LKR ${userStats.total > 0 ? (requestStats.totalRevenue / userStats.total).toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}`],
+        ['Revenue per Collector', `LKR ${userStats.collectors > 0 ? (requestStats.totalRevenue / userStats.collectors).toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}`]
       ];
 
       autoTable(doc, {
@@ -4114,7 +4129,15 @@ including user engagement, collection request analytics, financial metrics, and 
       completed: allCollectionRequests.filter(r => r.status === 'completed').length,
       confirmed: allCollectionRequests.filter(r => r.status === 'confirmed').length,
       cancelled: allCollectionRequests.filter(r => r.status === 'cancelled').length,
-      totalRevenue: allCollectionRequests.reduce((sum, r) => sum + (parseFloat(r.total_amount) || 0), 0)
+      totalRevenue: allCollectionRequests
+        .filter(r => ['completed', 'confirmed'].includes(r.status)) // Only count completed and confirmed requests
+        .reduce((sum, r) => {
+          const amount = typeof r.total_amount === 'string' ? 
+            parseFloat(r.total_amount.replace(/[^0-9.-]+/g, '')) : // Remove any non-numeric characters except decimal
+            typeof r.total_amount === 'number' ? 
+              r.total_amount : 0;
+          return sum + (isNaN(amount) ? 0 : amount);
+        }, 0)
     };
 
     return (
@@ -4153,7 +4176,7 @@ including user engagement, collection request analytics, financial metrics, and 
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-2xl font-bold text-blue-600">
-                  ${requestStats.totalRevenue.toFixed(2)}
+                  LKR {requestStats.totalRevenue.toLocaleString('en-LK')}
                 </div>
                 <div className="text-sm text-blue-600">Total Revenue</div>
               </div>
@@ -4294,7 +4317,7 @@ including user engagement, collection request analytics, financial metrics, and 
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Average Request Value</span>
                 <span className="text-sm font-semibold text-emerald-600">
-                  ${requestStats.total > 0 ? (requestStats.totalRevenue / requestStats.total).toFixed(2) : '0.00'}
+                  LKR {requestStats.total > 0 ? (requestStats.totalRevenue / requestStats.total).toFixed(2) : '0.00'}
                 </span>
               </div>
             </div>
@@ -4328,7 +4351,7 @@ including user engagement, collection request analytics, financial metrics, and 
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Total Revenue</span>
                 <span className="text-sm font-semibold text-emerald-600">
-                  ${requestStats.totalRevenue.toFixed(2)}
+                  LKR {requestStats.totalRevenue.toLocaleString('en-LK')}
                 </span>
               </div>
               <div className="flex items-center justify-between">
@@ -5125,7 +5148,7 @@ including user engagement, collection request analytics, financial metrics, and 
 
       {/* Support Ticket Details Modal */}
       {selectedTicket && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50 animate-in fade-in duration-300">
           <div className="bg-white rounded-2xl p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-semibold text-gray-900">Support Ticket Details</h3>
